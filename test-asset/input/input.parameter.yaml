@@ -1,4 +1,4 @@
-parameter:
+parameter
   - name: input_path
     description: input path
     required: true
