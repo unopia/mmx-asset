@@ -6,7 +6,7 @@ parameter:
       - True
       - False
     default_value: True
-  - name: x_nan_mode=dropna
+  - name: x_nan_mode
     description: x_nan_mode
     required: true
     default_value: dropna
