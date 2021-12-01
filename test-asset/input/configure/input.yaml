@@ -1,13 +1,12 @@
 parameter:
-	- name: debug
+  - name: debug
     description: debug mode
     required: true
     allowable_values:
       - True
       - False
     default_value: True
-	- name: x_nan_mode=dropna
+  - name: x_nan_mode=dropna
     description: x_nan_mode
     required: true
     default_value: dropna
-
