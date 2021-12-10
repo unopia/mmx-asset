@@ -26,7 +26,6 @@ parameter:
       - output
       - any
     default_value: none
-
   - name: input_path
     description: "Datamart path (note format : bucket_name/rest_path/)"
     required: true
@@ -74,12 +73,10 @@ parameter:
     description: "Ignore(reference) columns (format : value1,value2)"
     required: true
     default_value: LOTID,TABLE_TIME,MODEL
-
   - name: dashboard_log
     description: "Save Asset logs (only using dashboard)"
     required: true
     default_value: "s3-an2-ha-linearcomp-cw2/category=xai/type=log/item=sound_tbpl/split=reg_sound_tbpl_train/"
-
    - name: debug
      description: "debug mode (past date)"
      required: true
