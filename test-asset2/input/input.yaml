@@ -1,3 +1,4 @@
+entry: input 
 parameter:
   - name: next_data
     description: "the next data(csv) name"
