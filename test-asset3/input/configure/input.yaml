@@ -19,8 +19,5 @@ parameter:
   - name: e
     description: "e"
     required: true
-    allowable_values:
-      - 7
-      - 8
-      - 9
+
 
