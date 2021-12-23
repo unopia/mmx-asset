@@ -1,0 +1,82 @@
+entry: asset_readiness
+parameter:
+  - name: next_data
+    description: "the next data(csv) name"
+    required: true
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: preprocess
+  - name: next_params
+    description: "the next Paramerter(params) name"
+    required: true
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: preprocess
+
+  - name: outlier_level
+    description: "outlier level (sigma)"
+    required: true
+    default_value: 5
+  - name: outlier_ratio
+    description: "outlier ratio (float : 0 ~ 1)"
+    required: true
+    default_value: 1
+  - name: missing_ratio
+    description: "missing ratio (float : 0 ~ 1)"
+    required: true
+    default_value: 1
+  - name: quality_check_level
+    description: "the method of notice : the unrefined data(columns)"
+    required: true
+    allowable_values:
+      - error
+      - warning
+    default_value: warning
+  - name: prep_x_nan_mode
+    description: "the method of nan at train columns in preprocess (none, dropna, interpolation, fill_0, fill_1, ...)"
+    required: true
+    default_value: dropna
+  - name: prep_y_nan_mode
+    description: "the method of nan at predict column in preprocess (none, dropna, interpolation, fill_0, fill_1, ...)"
+    required: true
+    default_value: none
+  - name: prep_outlier_mode
+    description: "the method of outlier columns in preprocess"
+    required: true
+    allowable_values:
+      - none
+#      - distribution
+#      - spec_limit
+#      - specout_drop
+#      - exponential
+    default_value: none
+  - name: prep_smooth_mode
+    description: "the method of smooth columns in preprocess"
+    required: true
+    allowable_values:
+      - none
+#      - exponential
+#      - convolution
+#      - polynomial
+#      - spline
+#      - gaussian
+#      - binner
+#      - lowess
+#      - decompose
+#      - kalman
+    default_value: none
+
