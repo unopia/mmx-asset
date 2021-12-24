@@ -18,5 +18,8 @@ parameter:
     default_value: 5
   - name: e
     description: "e"
-
+  - name: date
+    description: "End Date (current : ${sysdate('$0s@0s')} / specific date : 2021-12-15T18:40:00)"
+    required: true
+    defalut_value: "${sysdate('$0s@0s')}"
 
