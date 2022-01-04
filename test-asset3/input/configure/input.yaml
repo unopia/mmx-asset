@@ -8,14 +8,14 @@ parameter:
       - 2
       - 3
     default_value: 2
-  - name: b
-    description: "b"
+  - name: e
+    description: "e"
     required: true
     allowable_values:
-      - 14
-      - 15
-      - 16
-    default_value: 15
+      - 143
+      - 153
+      - 163
+    default_value: 153
   - name: c
     description: "c"
 
