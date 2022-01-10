@@ -1,6 +1,6 @@
 entry: input 
 parameter:
-  - name: a
+  - name: --a
     description: "a"
     required: true
     allowable_values:
@@ -8,7 +8,7 @@ parameter:
       - 2
       - 3
     default_value: 2
-  - name: e
+  - name: --e
     description: "e"
     required: true
     allowable_values:
@@ -16,9 +16,9 @@ parameter:
       - 153
       - 163
     default_value: 153
-  - name: c
+  - name: --c
     description: "c"
     default_value: ""
-  - name: integer_parameter
+  - name: --integer_parameter
     description: "integer_parameter"
 
