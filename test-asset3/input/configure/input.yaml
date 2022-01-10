@@ -18,7 +18,6 @@ parameter:
     default_value: 153
   - name: c
     description: "c"
-    default_value: ""
   - name: integer_parameter
     description: "integer_parameter"
     default_value: null
