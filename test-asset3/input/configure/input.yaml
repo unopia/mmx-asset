@@ -18,4 +18,5 @@ parameter:
     default_value: 153
   - name: c
     description: "c"
+    default_value: ""
 
