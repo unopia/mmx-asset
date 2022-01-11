@@ -8,6 +8,8 @@ parameter:
       - 2
       - 3
     default_value: 2
+  - name: c
+    default_value: 20
   - name: e
     description: "e"
     required: true
@@ -16,7 +18,4 @@ parameter:
       - 153
       - 163
     default_value: 153
-  - name: integer_parameter
-    description: "integer_parameter"
-    default_value: null
 
