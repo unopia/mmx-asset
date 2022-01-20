@@ -49,8 +49,6 @@ parameter:
     default_value: 300
   - name: N_ITER
     description: "the search count of ahpo"
-    required: true
-    default_value: 35
   - name: ADJUST_RANGE
     description: "the enable of apho parameter range control"
     required: true
