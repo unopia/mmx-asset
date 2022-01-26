@@ -1,0 +1,28 @@
+parameter:
+  - name: next_data
+    description: "the next data(csv) name"
+    required: true
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: none
+  - name: next_params
+    description: "the next Paramerter(params) name"
+    required: true
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: none
+

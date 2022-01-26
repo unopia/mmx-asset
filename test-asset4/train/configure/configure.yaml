@@ -1,0 +1,59 @@
+parameter:
+  - name: next_data
+    description: "the next data(csv) name"
+    required: true
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: none
+  - name: next_params
+    description: "the next Paramerter(params) name"
+    required: true
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: none
+
+  - name: GROUP_KEYS
+    description: "group keys (columns)"
+    required: true
+    default_value: EQPTID,LSL
+  - name: GROUP_CNT
+    description: "the number of group keys"
+    required: true
+    default_value: 2
+  - name: MODEL
+    description: "default  model"
+    required: true
+    default_value: rrcf
+  - name: DECISION_RULE
+    description: "the rule of decision in anomaly detection"
+    required: true
+    default_value: lower
+  - name: MIN_DF_SIZE
+    description: "the minimum rows(index) of Data"
+    required: true
+    default_value: 300
+  - name: N_ITER
+    description: "the search count of ahpo"
+    required: true
+    default_value: 35
+  - name: ADJUST_RANGE
+    description: "the enable of apho parameter range control"
+    required: true
+    allowable_values:
+      - True
+      - False
+    default_value: False
