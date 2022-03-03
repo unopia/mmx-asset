@@ -2,6 +2,7 @@ parameter:
   - name: next_data
     description: "the next data(csv) name"
     required: true
+    visible: true
     allowable_values:
       - none
       - input
@@ -72,14 +73,17 @@ parameter:
   - name: ignore_columns
     description: "Ignore(reference) columns (format : value1,value2)"
     required: true
+    visible: flase
     default_value: LOTID,TABLE_TIME,MODEL
 
   - name: dashboard_log
     description: "Save Asset logs (only using dashboard)"
     required: true
+    visible: false
     default_value: "s3-an2-ha-linearcomp-cw2/category=xai/type=log/item=sound_tbpl/split=reg_sound_tbpl_train/"
 
   - name: date
     description: "End Date (current : ${sysdate('$0s@0s')} / specific date : 2021-12-15T18:40:00)"
     required: true
+    visible: false
     default_value: "${sysdate('$0s@0s')}"
