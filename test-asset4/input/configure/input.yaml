@@ -73,7 +73,7 @@ parameter:
   - name: ignore_columns
     description: "Ignore(reference) columns (format : value1,value2)"
     required: true
-    visible: flase
+    visible: false
     default_value: LOTID,TABLE_TIME,MODEL
 
   - name: dashboard_log
