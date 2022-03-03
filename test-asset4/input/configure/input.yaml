@@ -2,7 +2,6 @@ parameter:
   - name: next_data
     description: "the next data(csv) name"
     required: true
-    visible: false
     allowable_values:
       - none
       - input
@@ -16,7 +15,6 @@ parameter:
   - name: next_params
     description: "the next Paramerter(params) name"
     required: true
-    visible: false
     allowable_values:
       - none
       - input
@@ -31,12 +29,10 @@ parameter:
   - name: input_path
     description: "Datamart path (note format : bucket_name/rest_path/)"
     required: true
-    visible: false
     default_value: "s3-an2-ha-linearcomp-cw2/category=xai/type=raw/item=bigtable/"
   - name: select_mode
     description: "Select Datamart position"
     required: true
-    visible: false
     allowable_values:
       - nas
       - s3
@@ -44,7 +40,6 @@ parameter:
   - name: data_size
     description: "Data Load Size (minute)"
     required: true
-    visible: false
     default_value: 1440
   - name: dir_delay
     description: "Datamart delay (minute)"
