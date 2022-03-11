@@ -44,22 +44,18 @@ parameter:
   - name: dir_delay
     description: "Datamart delay (minute)"
     required: true
-    visible: false
     default_value: 40
   - name: data_delay
     description: "Data delay based time_column (minute)"
     required: true
-    visible: false
     default_value: 0
   - name: time_column
     description: "time column"
     required: true
-    visible: false
     default_value: OILPICKUP_START
   - name: mode
     description: "Operation mode"
     required: true
-    visible: false
     allowable_values:
       - none
       - ad
@@ -68,27 +64,33 @@ parameter:
   - name: x_columns
     description: "train columns (format : value1,value2)"
     required: true
-    visible: false
     default_value: OIL_PICKUP_HYDRAULIC_HEAD,ALPHA_VALUE,INITIAL_VALUE_COMPENSATION,INITIAL_VALUE,INPUT_POWER,LPIPE_HEIGHT,WITHSTANDING_VOLTAGE,Inspection_Name,Current,Final_Pg,Frequency,Initial_Pg,Leak_A,Rise_Pg_t,Vib_BAND,Vib_OA,Voltage,Watt
   - name: y_column
     description: "predict column"
     required: true
-    visible: false
     default_value: _401__index_v2_TBPL
   - name: ignore_columns
     description: "Ignore(reference) columns (format : value1,value2)"
     required: true
-    visible: false
     default_value: LOTID,TABLE_TIME,MODEL
 
   - name: dashboard_log
     description: "Save Asset logs (only using dashboard)"
     required: true
-    visible: false
     default_value: "s3-an2-ha-linearcomp-cw2/category=xai/type=log/item=sound_tbpl/split=reg_sound_tbpl_train/"
 
   - name: date
     description: "End Date (current : ${sysdate('$0s@0s')} / specific date : 2021-12-15T18:40:00)"
     required: true
-    visible: false
-    default_value: "${sysdate('$0s@0s')}"
+		default_value: "${sysdate('$0s@0s')}"
+environment:
+  - key: test_env1
+    value: test_value1
+  - key: test_env2
+    value: test_value2
+  - key: is_masking
+    value: is_masking
+    is_masking: yes
+  - key: is_masking2
+    value: is_masking2
+    is_masking: hahaha
