@@ -1,0 +1,3 @@
+seq,product,store,dc,seg,period,model,feature,feature_set,parameter,train
+"1",COOKING,Lowes,NL,Target,all,ARIMA_MA,"{}",Lowes_NL_A01_F01_P01,"{""order_1"":1,""order_2"":0,""order_3"":0 ,""lambda"":0 , ""featureset"" : [""MA3W""], ""featuresetbase"" : [""MA3W""], ""rounding"" : 0.7, ""tscleanMA"" : 0}",train
+"2",COOKING,Lowes,NL,Target,all,ARIMA_MA,"{}",Lowes_NL_A01_F01_P02,"{""order_1"":1,""order_2"":0,""order_3"":0 ,""lambda"":0 , ""featureset"" : [""MA5W""], ""featuresetbase"" : [""MA3W""], ""rounding"" : 0.7, ""tscleanMA"" : 0}",train

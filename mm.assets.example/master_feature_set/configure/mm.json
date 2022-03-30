@@ -1,0 +1,112 @@
+{
+  "remote": {
+    "url": "https://mm-dev.lgebigdata.com/mmweb",
+    "X-SERVICE-KEY": "3s6iU2ublEKFchv8C/+ORwzg30BNOb5c9kvMj2mKNifBKbnhF02DGDvvao2HUPmy"
+  },
+  "project": {
+    "name": "examples",
+    "perf_method": "MAX",
+    "model_select_type": "N",
+    "model_deploy_selection": 1    
+  },
+  "workflow": [
+    {
+      "name": "master-feature-set",
+      "parallelism": 5,
+      "model_plan_name": "model_train_plan_ABT_cooking",
+      "definition": [
+        {
+          "step": "input",
+          "environment": {
+          },
+          "args": [
+            {
+              "target": "default"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "master_feature_set": {
+      "name": "Feature_set_status_Flag",
+      "columns": [
+      {
+          "name": "product"
+      },
+      {
+          "name": "store"
+      },
+      {
+          "name": "dc"
+      }
+      ]
+  },
+  "model_plan": [
+    {
+      "name": "model_train_plan_ABT_cooking",
+      "columns": [
+        {
+          "name": "product",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "store",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "dc",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "feature_set",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "seg",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "period",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "model",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "feature",
+          "tag_type": "OPTION",
+          "data_type": "json"
+        },
+        {
+          "name": "parameter",
+          "tag_type": "OPTION",
+          "data_type": "json"
+        },
+        {
+          "name": "preprocess",
+          "tag_type": "ENTRY",
+          "data_type": "text"
+        },
+        {
+          "name": "train",
+          "tag_type": "ENTRY",
+          "data_type": "text"
+        },
+        {
+          "name": "score",
+          "tag_type": "ENTRY",
+          "data_type": "text"
+        }
+      ]
+    }
+  ]
+}

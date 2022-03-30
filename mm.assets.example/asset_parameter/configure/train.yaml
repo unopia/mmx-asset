@@ -1,0 +1,71 @@
+entry: train
+parameter:
+  - name: input_path
+    description: input path
+    required: true
+    default_value: /test_data/oil_pickup/
+  - name: select_mode
+    description: select mode
+    required: true
+    default_value: nas
+    visible: false
+  - name: data_size
+    description: data_size
+    required: true
+    default_value: 7200
+    visible: false
+  - name: dir_delay
+    description: dir delay
+    required: true
+    default_value: 40
+    visible: false
+  - name: data_delay
+    description: data delay
+    required: true
+    default_value: 530
+    visible: false
+  - name: time_column
+    description: time column
+    required: true
+    default_value: TIME
+  - name: mode
+    description: mode
+    required: true
+    allowable_values:
+      - ad
+      - xai
+    default_value: ad
+  - name: x_columns
+    description: x col
+    required: true
+    default_value: VALUE
+  - name: y_column
+    description: y col
+    required: true
+    default_value: none
+  - name: ignore_columns
+    description: ignore col
+    required: true
+    default_value: none
+  - name: debug
+    description: debug mode
+    required: true
+    allowable_values:
+      - True
+      - False
+    default_value: True
+  - name: debug_dates
+    description: debug dates
+    required: true
+    default_value: 2010-10-10T16:09:00Z
+environment:
+  - key: test_env1
+    value: test_value1
+  - key: test_env2
+    value: test_value2
+  - key: is_masking
+    value: is_masking
+    is_masking: yes
+  - key: is_masking2
+    value: is_masking2
+    is_masking: hahaha

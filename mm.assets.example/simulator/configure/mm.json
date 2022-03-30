@@ -1,0 +1,407 @@
+{
+  "remote": {
+    "url": "http://165.186.175.240:8080/hub_stage",
+    "X-SERVICE-KEY": "ENC(gAAAAABdzjRn1UwmA5DvRFpBxXHdz1EKUQWxRZxqgBPhcgRTdta1QWycFh__ne3cIZYRs99NZrjSmP1Wx2twhJKIS1muelrzjZr5GbKYRuJdyYHLllvg7iZ8eq_OfYPFiwUhmhvobcOx)"
+  },
+  "project": {
+    "name": "examples",
+    "perf_method": "MAX",
+    "model_select_type": "N",
+    "model_deploy_selection": null,
+    "slack_url": "",
+    "is_alert": "N"
+  },
+  "workflow": [
+    {
+      "name": "basic-train-1",
+      "parallelism": 5,
+      "model_plan_name": "model_plan_lowes",
+      "definition": [
+        {
+          "step": "input"
+        },
+        {
+          "step": "preprocess"
+        },
+        {
+          "step": "train"
+        },
+        {
+          "step": "score"
+        },
+        {
+          "step": "selectmodel"
+        },
+        {
+          "step": "output"
+        }
+      ]
+    },
+    {
+      "name": "basic-train-2",
+      "parallelism": 2,
+      "model_plan_name": "model_plan_thd",
+      "definition": [
+        {
+          "step": "input"
+        },
+        {
+          "step": "preprocess"
+        },
+        {
+          "step": "train"
+        },
+        {
+          "step": "score"
+        },
+        {
+          "step": "selectmodel"
+        },
+        {
+          "step": "output"
+        }
+      ]
+    },
+    {
+      "name": "best-model-train-1",
+      "parallelism": 5,
+      "model_plan_name": "model_plan_lowes",
+      "definition": [
+        {
+          "step": "input",
+          "environment": {},
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in 2018-11-01T00:00:00 2019-01-02T00:00:00"
+            }
+          ]
+        },
+        {
+          "step": "train",
+          "environment": {},
+          "args": [
+            {
+              "target": "default",
+              "model": "ARIMA",
+              "arg": "1 2 3 4 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "best-model-train-2",
+      "parallelism": 5,
+      "model_plan_name": "model_plan_thd",
+      "definition": [
+        {
+          "step": "input",
+          "environment": {},
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in 2018-11-01T00:00:00 2019-01-02T00:00:00"
+            }
+          ]
+        },
+        {
+          "step": "train",
+          "environment": {},
+          "args": [
+            {
+              "target": "default",
+              "model": "ARIMA",
+              "arg": "1 2 3 4 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ds-sql",
+      "parallelism": 5,
+      "definition": [
+        {
+          "step": "input",
+          "datasource_type": "SQL",
+          "environment": {
+            "DB_HOST": "165.186.175.238",
+            "DB_PORT": "3306",
+            "DB_USER": "jamong",
+            "DB_PW": "ENC(gAAAAABdwYXHzSwMwDsQT-hzs8VWE0TzPFP1WMocyrdxi7jQXf3sKZyxJMNSBHf7Nm0IfH0y2-Agh1OQZlWcdcPSVlCtFU0Uog==)",
+            "DB_NAME": "intellytics",
+            "DB_TABLE": "TB_COM_CODE",
+            "DB_CHARSET": "utf8"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)} GROUP_ID='TIME_CODE' AND CODE_ID='01'"
+            }
+          ]
+        },
+        {
+          "step": "output",
+          "datasource_type": "SQL",
+          "environment": {
+            "DB_HOST": "165.186.175.238",
+            "DB_PORT": "3306",
+            "DB_USER": "jamong",
+            "DB_PW": "ENC(gAAAAABdwYXHE4lITyWYyJYZqh-_eY04g-osx46Y6cYvriJvsrY2TIXGFOrsoZkYVU9FmJbAq4oodj665MnGhihyPtAZIHVd9g==)",
+            "DB_NAME": "test",
+            "DB_TABLE": "TB_COM_CODE",
+            "DB_CHARSET": "utf8"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "best-model-train-3",
+      "parallelism": 5,
+      "model_plan_name": "model_plan_lowes",
+      "next_workflow_name": "best-model-train-2",
+      "definition": [
+        {
+          "step": "input",
+          "environment": {},
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in 2018-11-01T00:00:00 2019-01-02T00:00:00"
+            }
+          ]
+        },
+        {
+          "step": "train",
+          "environment": {},
+          "args": [
+            {
+              "target": "default",
+              "model": "ARIMA",
+              "arg": "1 2 3 4 5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ds-s3",
+      "parallelism": 5,
+      "definition": [
+        {
+          "step": "input",
+          "datasource_type": "S3",
+          "environment": {
+            "ACCESS_KEY": "AKIAJNIO4WKPSZ6X2LOA",
+            "SECRET_KEY": "ENC(gAAAAABdwYXHRlLSLSHzoAdYmgy5ZYarGc8YX5nNmcOz68LaUi15MDMiM5CusTsMuwBWRsC2mPJ3RfUKEv3g-M3Q3PixKGkHtD9zR-vyMHktuq8d6UlJuID6fO3GAWnAG1Cnm1sQ-kIW)",
+            "DB_HOST": "165.186.175.238",
+            "DB_PORT": "3306",
+            "DB_USER": "jamong",
+            "DB_PW": "ENC(gAAAAABdwYXHo_BEM5SA2ueHk55c5o6qM3Zw-F1PLndKqcO2jQ_ssS6Q17vyAJ4NH_lsF6aramzlPlr1X65YnW5pmHIj968mrw==)",
+            "DB_NAME": "intellytics",
+            "INDEX_CODE": "iris"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in 2018-11-01T00:00:00 2019-01-02T00:00:00"
+            }
+          ]
+        },
+        {
+          "step": "output",
+          "datasource_type": "S3",
+          "environment": {
+            "ACCESS_KEY": "AKIAJNIO4WKPSZ6X2LOA",
+            "SECRET_KEY": "ENC(gAAAAABdwYXHwnu3KwXl1xhr2uxBbJpMOXBzydIIiJzfg4GY9ALKoS9D1bKllCpyAkc-7JOzqaLSWQZijt4HiRYFTAimrRpOhCViIDvOcWYUgoa4JUwgajIFZM5ITdubseHmRRg0hgmY)",
+            "BUCKET_NAME": "mm-storage-stage",
+            "INDEX_CODE": "iris"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in ${env(workflow_path)}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ds-s3-partition",
+      "parallelism": 5,
+      "definition": [
+        {
+          "step": "input",
+          "datasource_type": "S3-PARTITION",
+          "environment": {
+            "ACCESS_KEY": "AKIAJNIO4WKPSZ6X2LOA",
+            "SECRET_KEY": "ENC(gAAAAABdwYXHvIlZagxqv5vXsYKREBQqiIBEHLO2Qife3oAFZsIEGQdX3rTzUQUYspWx7-dEhI-PnVdWoL1NDJTDpjogxD5CVEa8tq_wfgogUR9dLL4cX92IlWqRnHixz6qBw2K6Kz5L)",
+            "BUCKET_NAME": "mm-storage-stage",
+            "INDEX_CODE": "solar_cell_test"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in 2019-07-01T00:00:00 2019-07-01T00:30:00"
+            }
+          ]
+        },
+        {
+          "step": "output",
+          "datasource_type": "S3-PARTITION",
+          "environment": {
+            "ACCESS_KEY": "AKIAJNIO4WKPSZ6X2LOA",
+            "SECRET_KEY": "ENC(gAAAAABdwYXHoYfWOY3gMlu8VAFT64DNFNr2qTQ9JAb9uc7utm1frheaGlXxd0xklVTDSujVK941I53G47FRxGP3F88IjQLS7b9rfGTr_jyHO12YB9bCZZgQIQylSjH9tESuTjOrLitL)",
+            "BUCKET_NAME": "mm-storage-stage",
+            "INDEX_CODE": "solar_cell_test"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in ${env(workflow_path)}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ds-bigquery",
+      "parallelism": 5,
+      "definition": [
+        {
+          "step": "input",
+          "datasource_type": "BIGQUERY",
+          "environment": {
+            "ACCOUNT_TYPE": "service_account",
+            "PROJECT_ID": "smartdatateam-1208",
+            "PRIVATE_KEY_ID": "d53e6950ad9b6fa9fbbbcd8f28e7ee3e5dbf91fa",
+            "PRIVATE_KEY": "ENC(gAAAAABdwYXHKCr9GUchYMj0j_k1Hv7vIheXPtKUx5eyWjRltUbTlyjTze1KpX9WNVnF9hVLrlr2XAMWCJR8UZyCmF2mveKJrcdahOHj29-SzMZrLWVlxQY6VvF0LVRmnQ8Df-szcT4ZEpJTNc5QxWRxGGNdxymg06RnJR4osRwDEwjnkXGSYZAi3p-XNLghj6Yfy6qF1n55Rjhb07vzvC25FPp3bhpBYZrIX7Ge1uWSU4Elm0fpCVbsMexmPFO3GwelvmnFQ6i5xWZbeOGcl8rEUUDtXsX3URN2cewGPZ59gOU7Tcd3I-ckVWpd70YSL_hdA1e15Vtzui1BX2X0eIgTWerJqaec8o8-in3wU6xdi0mpM0sIWVCEFPuFkhKdnoqIuuoGyemmqQHD9irGj8ioSWZ_PKw9RcRDaZymy0FkkroKn-R8SBoMNqs-NirFmE461LFkaYmAc725A3mdCJykTr50SJuxgaYPib9y_97WQTgoR9_5ocEgfPUGDFeS29LLH794yFnRut5kCchbHwsMApKnP6U9W_vwvWAtmPSlJUenvASETyIxDu0LztbMvlg5PN_rhr-HgVrMFotfxLovyqOadH2E2XFTjeXLUozL1kTQxoBQBI-HIQr5i4kxPQwyfjgMHX9rJ9FKHlr3CzMkUVTntn57Ah_oer14wPqQP67Z5oGzy835jGcvfYSTdbIOjbu1LNnbO22OGFZygsPrnLaw7AY1UfVKWsI7G4zP6ociEV020jXJ0WyVjwk4SSJxgjRe688tlIT07gajpNxPuFD6LLQHyfMB5Xg7HCAtnTE3fd_0sJnZCThQciXcralBzAj0dCUMltZ8SEyG3dqtbZZmll1razkOcxoYQn8Zz9slA7tj7XtY_3jbgbiaOEKc0cWTF3aQ-QXeH8sQ_rmDVxMgwOzIWZ6tEx-T4_z4xIDH-eIeockkkrXptwwqEOOzJ6tHQ2TXyN2hVGUuR27K12rliXVIZ1tVar5TbdHyKD5LX5TvYkAe2_cNcQAnzKo0hnfE4JQVaKbJrausYqjVBG8zIzAqKpwkdF7vpqFkYibK0GerGBep3NBdUQQoxipslNUTrSvDZgEklopSeHmyJqZOgDnTUPjRWP75q6pW4t8Q4MJxvitrtu9NqNzaQHJDKXceSwtLH9XlzebDaZAuOfgfMAYEwaxzGmQyAsKG5yzBlLh86MQ2DJv1vP1991FwL7smCUWJitcUSBMtTGDEoxWHzlXw6tcLkuU0c9Drsjysf3FXPKZ2rDS2l50aPsRh32T4dd0SYgx5o_Enf3q6fUiZVOjpgwHyyQ5YnFmtuqaR0s6zuCKrUR9qrp7PAZ6G1c9pRKfZ6aV7cUT5KpltChnkrpvUsrTN9-jWqqciJEisXQKrNk1ruOh2a9zQxnA3iYCo8lN59ys6dtDi7a4t_EFdVVXpvB1gr-8pOW4XJYBS0GZ0_8K7zxRZ3ir1KvfM_kJvLFWvjtu7Tu7zalWSqvKAwZLdL69l4pk58n7xiq1FkMVJKFhTcleJMeVqJKs6bQH6FCiaxsbQ1nv_iNTDck00lfazDW7yWdsE5A872NhfC4dvoQJIqW4ZbmelKolNBZzZO2Jzbxem7HgNA2t0ESzqV-2t3VGkrB43sfVusVdkjsa5qpHv3NurAahqQXRhPPnc4WLj9Q3TXKmkDScH7TEcUQxzom3o6fYgvO2NWi-rds3tSVA8DbPR6PL7JposZQN1DJLcHw43dK0C3w6M1XCOxmfLK1XTZXFvCz_ONYRSyPHrl2CVnlgHJVjEzr-TDpBuydPBnZCIx21m7ZnpEbZMmnYe_3TT2JIV24-DTFXKQ90vg0RYrfQKlVxQZqZ5m096G4OPf1tRPWKaukMuSjVgF0oALHDVSeR9gv_Z7WW4kS-uJVkNhAP_PA2A0FCRSTQg4gWwMWFCS4r5e0GBRfSnAjxdr2YINYXPkEH5gt7C8AdVMX0Nm4YLV7W9aEAlml5UlHGa35oBwlrNDOtny6SlY4uwyd7_rzbyxCqgtskge3j-GI1Gj00A2c0cf45VqhFratLkvJQFFwZOj1gkB8w7Ibk6SgoMzK2_3BnW7sA08h6ekdp5ywHKF-mMYM-89saNWmJPtug-_IozIzi5uuFTqS63rmcGawkW2BeLGm6q8zKo6SnjZ4xSzBQpOocW9rt5FN5hpVzcRkmKqs3QeNOTv-apuLE6P1m5n8ZQSgFr51UFlZLOXXpCy8RqD8Zf0fNTPO6SfDaY1wbV7zjuMaqT5XYNUbf2nEdpamact8XUGaguZRfaUumfKLq1rPGUoXM34-2cvZ7MSv66_Hzvx9JWqFBzucXpH11_CjKfXuizEohlOkHPkAA0xk0wrbf6iVo8J1hpIib-dzqGpnAyZiQ0Sd5JQw==)",
+            "CLIENT_EMAIL": "ENC(gAAAAABdwYXHYEuUSRtEAWZ25mHyjrKed7g-2PvnbuLdhTZB2ffQc51hWlOxdERqUctJlyoxx9RxyHflEuzY_JNOb3uPsIxm7w_4yngZ9sGBt4nORbkcU8acyXL3z4HIK4kqDKwtOR9tWAJRMa5L6BPtpeMUN-iUKw==)",
+            "CLIENT_ID": "ENC(gAAAAABdwYXHqN2EpgtMf99bZfPEolfDCnmU6KIl9CYK8ZHk44F28ezxpdYl-yL3vdcywI1YiCfHkCN9UCmj9GbysMzZFqA-EBYtGsdevkHBY4YT44G13YU=)",
+            "AUTH_URI": "https://accounts.google.com/o/oauth2/auth",
+            "TOKEN_URI": "https://oauth2.googleapis.com/token",
+            "AUTH_PROVIDER_x509_CERT_URL": "https://www.googleapis.com/oauth2/v1/certs",
+            "CLIENT_x509_CERT_URL": "ENC(gAAAAABdwYXHRwlifYX5ZnrNZ5fl9RgnnHFylkXwdHyr594_LrsokBvkofrLmlQRPPAODfehFkKUqJwnsvWRZhBqCwp5OpSjRkWDSif-NzX86A3KPp3jIt4qitQx3iZOZtnlJ0O2Ayyc2svLB955EX9tm4DQ8NpI3sJailBeSM6HFNcZ5J7vmouypgu_SFZh5MJui6f9zkiwpl43AweTqo0HdkhzCUQ1yQ==)",
+            "DATASET_NAME": "myfirst_bq_dataset",
+            "DATASET_TABLE": "gcp_billing_export_v1_00BC27_65A643_C3C658"
+          },
+          "args": [
+            {
+              "arg": "${env(project_home)}/${env(workflow_path)}/data_in"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "model_plan": [
+    {
+      "name": "model_plan_lowes, model_plan_thd",
+      "columns": [
+        {
+          "name": "product",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "store",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "dc",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "seg",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "period",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "model",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "feature",
+          "tag_type": "OPTION",
+          "data_type": "json"
+        },
+        {
+          "name": "feature_set",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "parameter",
+          "tag_type": "OPTION",
+          "data_type": "json"
+        },
+        {
+          "name": "train",
+          "tag_type": "ENTRY",
+          "data_type": "text"
+        }
+      ]
+    },
+    {
+      "name": "model_plan_lowes, model_plan_thd",
+      "columns": [
+        {
+          "name": "product",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "store",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "dc",
+          "tag_type": "TARGET",
+          "data_type": "text"
+        },
+        {
+          "name": "seg",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "period",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "model",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "feature",
+          "tag_type": "OPTION",
+          "data_type": "json"
+        },
+        {
+          "name": "feature_set",
+          "tag_type": "OPTION",
+          "data_type": "text"
+        },
+        {
+          "name": "parameter",
+          "tag_type": "OPTION",
+          "data_type": "json"
+        },
+        {
+          "name": "train",
+          "tag_type": "ENTRY",
+          "data_type": "text"
+        }
+      ]
+    }
+  ]
+}

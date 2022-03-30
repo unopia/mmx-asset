@@ -1,0 +1,36 @@
+workflow:
+  - name: mnist-train-1
+    definition:
+      - step: input
+      - step: train
+        args:
+          - target: group-a
+            model: Sequential
+            arg: ['1', 'softmax', '0.1', 'False']
+          - target: group-a
+            model: Sequential
+            arg: ['1', 'softmax', '0.5', 'False']
+          - target: group-b
+            model: Sequential
+            arg: ['1', 'softmax', '0.6', 'False']
+          - target: group-b
+            model: Sequential
+            arg: ['1', 'softmax', '0.8', 'False']
+      - step: selectmodel
+  - name: mnist-train-2
+    definition:
+      - step: input
+      - step: train
+        args:
+          - target: group-c
+            arg: ['1', 'softmax', '0.2', 'False']
+          - target: group-c
+            arg: ['1', 'softmax', '0.3', 'False']
+          - target: group-d
+            arg: ['1', 'softmax', '0.7', 'False']
+          - target: group-d
+            arg: ['1', 'softmax', '0.9', 'False']
+  - name: mnist-inference-1
+    definition:
+      - step: input
+      - step: inference

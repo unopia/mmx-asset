@@ -1,0 +1,10 @@
+remote:
+  url: http://165.186.175.240:8080/hub_stage
+  X-SERVICE-KEY: ENC(gAAAAABdzjRn1UwmA5DvRFpBxXHdz1EKUQWxRZxqgBPhcgRTdta1QWycFh__ne3cIZYRs99NZrjSmP1Wx2twhJKIS1muelrzjZr5GbKYRuJdyYHLllvg7iZ8eq_OfYPFiwUhmhvobcOx)
+namespace:
+  name: public
+project:
+  name: examples
+  perf_method: MAX
+  model_select_type: 'N'
+  model_deploy_selection: 1

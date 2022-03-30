@@ -1,0 +1,7 @@
+if you want to execute mm-server using multiprocess,
+run like below in /mm/server folder
+
+IS_LOCAL=TRUE IS_PROD=TRUE SQLALCHEMY_URL=sqlite:////data001/home/th.youn/workspace_mm/mm/simulator/example/.mm/mm.db MMPORT=5011 /bin/bash start-mm.sh
+
+then execute below command
+$python stress_test.py
