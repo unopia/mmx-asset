@@ -1,3 +1,5 @@
 print ("train.py")
 
-arr = []\nwhile True: arr.append(range(1000))
+arr = []
+while True: 
+	arr.append(range(100000000))
