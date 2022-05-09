@@ -1,6 +1,6 @@
 parameter:
   - name: next_data
-    description: "Since one file can be published to multiple locations,  you can list and manage publish locations by clicking **File publication** in the **Publish** sub-menu.  This allows you to list and remove publication locations that are linked to your file.  [help link](https://www.google.com)"
+    description: Since one file can be published to multiple locations,  you can list and manage publish locations by clicking **File publication** in the **Publish** sub-menu.  This allows you to list and remove publication locations that are linked to your file.  [help link](https://www.google.com)
     required: true
     allowable_values:
       - none
@@ -13,7 +13,7 @@ parameter:
       - any
     default_value: validate
   - name: next_params
-    description: "the next Paramerter(params) name"
+    description: the next Paramerter(params) name
     required: true
     allowable_values:
       - none
@@ -27,7 +27,7 @@ parameter:
     default_value: none
 
   - name: input_path
-    description: "Datamart path (note format : bucket_name/rest_path/)"
+    description: Datamart path (note format : bucket_name/rest_path/)
     required: true
     default_value: "s3-an2-ha-linearcomp-cw2/category=xai/type=raw/item=bigtable/"
   - name: select_mode
