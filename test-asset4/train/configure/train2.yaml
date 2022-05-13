@@ -1,0 +1,26 @@
+parameter:
+  - name: N_ITER
+    description: "the search count of ahpo"
+    required: true
+    default_value: 35
+  - name: ADJUST_RANGE
+    description: "the enable of apho parameter range control"
+    required: true
+    visible: false
+    allowable_values:
+      - True
+      - False
+    default_value: False
+
+environment:
+  - key: test_env1
+    value: test_value1
+  - key: test_env2
+    value: test_value2
+  - key: is_masking
+    value: is_masking
+    is_masking: Y
+  - key: is_masking2
+    value: is_masking2
+    is_masking: hahaha
+
