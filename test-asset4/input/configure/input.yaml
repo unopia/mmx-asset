@@ -1,6 +1,6 @@
 parameter:
   - name: next_data
-    description: |
+    description:
       aa **bold**  
       bb  
       cc [help link](https://www.google.com)  
