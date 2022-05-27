@@ -1,2 +1,2 @@
 print ("input.py")
-exit(1)
+raise Exception("soon exception")
