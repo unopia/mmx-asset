@@ -1,0 +1,258 @@
+parameter:
+
+  - name: input_path
+    description: "[데이터준비][INPUT-1] 이미지 데이터 저장소 위치"
+    required: true
+    visible: true
+    default_value: "ca-vision-data-dev/he-tv-demo-dev/origin/"
+
+  - name: output_path
+    description: "[데이터저장][OUTPUT-1] 최종 모델 저장 위치"
+    required: true
+    visible: true
+    default_value: "ca-vision-model-dev/he-tv-demo-dev/output/"
+
+  - name: make_readiness_report
+    description: "[데이터평가][CHK-1] 입력 데이터의 품질 파악 및 Data Augmentation 내용 설명"
+    required: true
+    visible: true
+    allowable_values:
+      - true
+      - false
+    default_value: true
+
+  - name: make_evaluation_report
+    description: "[데이터평가][CHK-2] modeling 내용을 평가하고, 추가 training 에 대한 방향 제안"
+    required: true
+    visible: true
+    allowable_values:
+      - true
+      - false
+    default_value: true
+
+  - name: augmentation_mode
+    description: "[데이터증강][AUG-1] 데이터증강 방법"
+    required: true
+    visible: true
+    allowable_values:
+      - auto
+      - manual
+    default_value: auto
+
+  - name: data_count_per_class
+    description: "[데이터증강][AUG-2] class 별 train 에 사용할 image 수 (실제 데이터 수보다 설정값이 클 경우 다양한 증강 방법으로 이미지 생성) "
+    required: true
+    visible: true
+    default_value: 400
+
+  - name: enable_train_hpo
+    description: "[모델링][TRAIN-1] Train 시, hyper paramter optimization 을 사용할지 여부"
+    required: true
+    visible: true
+    allowable_values:
+      - true
+      - false
+    default_value: false
+
+
+  ###################################
+  ##### Expand
+  ###################################
+
+
+  - name: retraining_model
+    description: "[시스템설정][SYS-1] pre-train 된 모델 설정 (my_result 는 이전 train 결과를 추가로 training 하고 싶을 경우 선택)"
+    required: true
+    visible: true
+    allowable_values:
+      - "mobilenet"
+      - "my_result"
+    default_value: "mobilenet"
+
+  - name: modeling_workflow_count
+    description: "[시스템설정][SYS-2] 동시에 모델링을 진행할 workflow 수 (비례하여 모델링 시간 단축)"
+    required: true
+    visible: true
+    allowable_values:
+      - 1
+      - 2
+      - 3
+      - 4
+    default_value: 1
+
+  - name: train_test_split
+    description: "[데이터준비][INPUT-2] train/test  데이터 구분 여부(input_path 아래 train/test 폴더 있어야 함)  (연관설정:input_path) "
+    required: true
+    visible: false
+    allowable_values:
+      - true
+      - false
+    default_value: false
+
+  - name: train_test_ratio
+    description: "[데이터준비][INPUT-3] train/test 자동 구분 시, train 비율(연관설정:train_test_split) "
+    required: true
+    visible: false
+    default_value: 0.8
+
+
+  - name: dataset_count
+    description: "[데이터증강][AUG-3] 몇가지 case 로 데이터를 증강 시킬지 결정 (case 별 model 생성하고, f1-score로 최종 모델 선택)"
+    required: true
+    visible: false
+    default_value: 20
+
+
+  - name: augmentation_image_crop
+    description: "[데이터증강][AUG-4] 입력 이미지에서 object boundary 로 segmentation 할지 여부(readiness report 참조)"
+    required: true
+    visible: false
+    allowable_values:
+      - true
+      - false
+    default_value: false
+
+  - name: crop_img_margin
+    description: "[데이터증강][AUG-5] segment 된 이미지의 marging 을 결정"
+    required: true
+    visible: false
+    default_value: 20
+
+  - name: augmentation_cyclegan
+    description: "[데이터증강][AUG-6] 데이터증강 시, Cycle GAN 모델로 새로운 이미지를 생성할지 여부 (train 시간 필요)"
+    required: true
+    visible: false
+    allowable_values:
+      - true
+      - false
+    default_value: false
+
+  - name: manual_augmentation
+    description: "[데이터증강][AUG-6] 메뉴얼 방식으로 데이터 증강 <doc.: http://collab.lge.com/main/display/MINTELI/%5BAIP%5D+4.8.2+AIP+Image+Modeling > (연관설정: augmentation_mode)"
+    required: true
+    visible: false
+    default_value: "10x[rotation:0.8/color:0.7],10x[rotation:0.7/color:0.5]"
+
+  - name: train_hpo_parameters
+    description: "[모델링][TRAIN-2] HPO 파라미터 <manual: http://collab.lge.com/main/display/MINTELI/%5BAIP%5D+4.8.2+AIP+Image+Modeling > (연관설정: enable_train_hpo=true)"
+    required: true
+    visible: false
+    default_value: "optimizer_learning_rate:1e-6~1e-2,epochs:30"
+
+  - name: train_parameters
+    description: "[모델링][TRAIN-3] TRAIN 파라미터 <manual: http://collab.lge.com/main/display/MINTELI/%5BAIP%5D+4.8.2+AIP+Image+Modeling > (연관설정: enable_train_hpo=false)"
+    required: true
+    visible: false
+    default_value: "optimizer_learning_rate:1e-6,epochs:30"
+
+
+  - name: enable_active_learn
+    description: "[데이터저장][OUT-2] Train 결과에서 uncertainty 가 높은 image 들을 train data 에서 제거할지 여부. (retraining_model = my_result 로 선택 시에만 사용 가능)"
+    required: true
+    visible: false
+    allowable_values:
+      - true
+      - false
+    default_value: true
+
+    #########################
+    ### Invisiable Arg. #####
+    #########################
+
+  - name: next_data
+    description: "삭제예정"
+    required: true
+    visible: false
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: input
+
+  - name: next_params
+    description: "삭제예정"
+    required: true
+    visible: false
+    allowable_values:
+      - none
+      - input
+      - validate
+      - preprocess
+      - train
+      - inference
+      - output
+      - any
+    default_value: input
+
+  - name: global_pipeline_type
+    description: "삭제예정"
+    required: true
+    visible: false
+    allowable_values:
+      - none
+      - inference
+      - pretrain
+      - train
+      - posttrain
+    default_value: pretrain
+
+
+  - name: global_model_type
+    description: "삭제예정"
+    required: true
+    visible: false
+    allowable_values:
+      - vision
+    default_value: vision
+
+  - name: global_log_path
+    description: "삭제예정"
+    required: true
+    visible: false
+    default_value: "ca-vision-model-dev/he-tv-demo-dev/log/"
+
+  - name: modeling_data_path
+    description: "삭제예정"
+    required: true
+    visible: false
+    default_value: "${env(project_home)}/.modeling_data/"
+
+  - name: data_labeling_mode
+    description: "입력 데이터 라벨링"
+    required: true
+    visible: false
+    allowable_values:
+      - none
+      - auto
+      - manual
+    default_value: none
+
+  - name: data_labeling_info_path
+    description: "(TBD) : 입력된 labeling info path"
+    required: true
+    visible: false
+    default_value: "/"
+
+  - name: selected_extra_path
+    description: "[Edge Manager][INTERFACE-1] Edge Manager interface 용으로, 추가 입력 데이터 위치"
+    required: false
+    visible: false
+    default_value: ""
+
+  - name: build_number
+    description: "[Edge Manager][INTERFACE-2] Edge Manager interface 용으로, 모델 파일 이름 구분자1 "
+    required: false
+    visible: false
+    default_value: ""
+
+  - name: current_time
+    description: "[Edge Manager][INTERFACE-3] Edge Manager interface 용으로, 모델 파일 이름 구분자2 "
+    required: false
+    visible: false
+    default_value: ""
+
