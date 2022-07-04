@@ -7,7 +7,7 @@ import csv
 
 home = os.environ['project_home']
 workflow_history_path = os.environ['workflow_history_path']
-step = 'models'
+step = 'train'
 target_path = os.environ['target_path']
 seq = os.environ.get('seq', '0')
 
