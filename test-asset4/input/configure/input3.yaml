@@ -6,7 +6,7 @@ parameter:
     visible: true
     default_value: "ca-vision-data-dev/he-tv-demo-dev/origin/"
 
-  - name: output_path
+  - name: 
     description: "[데이터저장][OUTPUT-1] 최종 모델 저장 위치"
     required: true
     visible: true
