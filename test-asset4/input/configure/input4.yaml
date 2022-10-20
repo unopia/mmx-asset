@@ -1,2 +1,13 @@
 entry: asset_readiness
-parameter: - name: input_path
+parameter: 
+  - name: input_path
+    description: "[데이터준비][INPUT-1] 이미지 데이터 저장소 위치"
+    required: true
+    visible: true
+    default_value: "ca-vision-data-dev/he-tv-demo-dev/origin/"
+
+  - name: output_path
+    description: "[데이터저장][OUTPUT-1] 최종 모델 저장 위치"
+    required: true
+    visible: true
+    default_value: "ca-vision-model-dev/he-tv-demo-dev/output/"
