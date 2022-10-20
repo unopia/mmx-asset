@@ -1,2 +1,2 @@
 entry: asset_readiness
-parameter: {}
+parameter: - name: input_path
