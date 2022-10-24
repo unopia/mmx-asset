@@ -260,12 +260,10 @@ parameter:
     description: "test_key"
     required: false
     visible: true
-    masked: true
     default_value: "qwer1234!"
 
   - name: test_key2
     description: "test_key2"
     required: true
     visible: false
-    masked: true
     default_value: "123123!"
